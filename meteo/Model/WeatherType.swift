@@ -52,6 +52,14 @@ enum WeatherType: Decodable {
         }
     }
     
+    var nameImage: String {
+        if case WeatherType.clouds(let cloudIntensity) = self {
+            return "\(cloudIntensity) clouds"
+        } else {
+            return "\(self)"
+        }
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let code = try container.decode(Int.self)
